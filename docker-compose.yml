@@ -1,0 +1,15 @@
+services:
+  deepai-proxy:
+    build: .
+    container_name: deepai-proxy
+    restart: unless-stopped
+    ports:
+      - "${PORT:-1417}:1417"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=1417
+      - PROXY_API_KEY=${PROXY_API_KEY:-deepai-local}
+      - DEEPAI_KEYS=${DEEPAI_KEYS:-}
+      - CONFIG_DIR=/data
+    volumes:
+      - ./data:/data

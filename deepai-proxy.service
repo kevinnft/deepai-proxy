@@ -1,0 +1,17 @@
+[Unit]
+Description=DeepAI Code to OpenAI-Compatible Proxy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/deepai-proxy
+Environment="HOST=0.0.0.0"
+Environment="PORT=1417"
+EnvironmentFile=-/opt/deepai-proxy/.env
+ExecStart=/usr/bin/env python3 /opt/deepai-proxy/server.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
